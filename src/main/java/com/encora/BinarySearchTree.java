@@ -11,11 +11,15 @@ public class BinarySearchTree implements Tree {
             return root;
         } else if (value < root.getValue()) {
             // when root is already set.
-            root = root.getLeft();
-            add(value);
+            if (root.getLeft() == null) { // We look for a lower node (left)
+                root.setLeft(new Node(value));
+                return root; // Recursion
+            }
         } else if (value > root.getValue()) {
-            root = root.getRight();
-            add(value);
+            if (root.getRight() == null) { // We look for a grader node (right)
+                root.setRight(new Node(value));
+                return root;
+            }
         }
         return null;
     }
@@ -24,10 +28,17 @@ public class BinarySearchTree implements Tree {
         if (root != null) {
             if (root.getValue() == value) {
                 return true;
-            } else if (value < root.getValue() ) {
+            } else if (value < root.getValue()) {
                 // verify if value is less or greater than node value
-                root = root.getLeft(); // We look for a lower node (left)
-                contains(value); // Recursion
+                if (root.getLeft() != null) {
+                    root = root.getLeft(); // is there need to reassign root? contains tests failing
+                    return contains(value);
+                }
+            } else if (value > root.getValue()) {
+                if (root.getRight() != null) {
+                    root = root.getRight(); // is there need to reassign root? contains tests failing
+                    return contains(value);
+                }
             } else {
                 return false;
             }
