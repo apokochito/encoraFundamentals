@@ -30,7 +30,7 @@ class BinarySearchTreeTest {
         assertThat(tree.contains(18)).isTrue();
         assertThat(tree.add(25)).isNotNull();
         assertThat(tree.contains(25)).isTrue();
-        // assertThat(tree.contains(18)).isTrue(); Test is failing because of the root
+        assertThat(tree.contains(18)).isTrue();
         assertThat(tree.contains(1)).isFalse();
     }
 

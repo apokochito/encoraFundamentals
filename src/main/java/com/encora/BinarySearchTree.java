@@ -22,22 +22,17 @@ public class BinarySearchTree implements Tree {
     }
 
     public boolean contains(int value) {
-        if (root != null) {
-            if (root.getValue() == value) {
-                return true;
-            } else if (value < root.getValue()) {
-                // verify if value is less or greater than node value
-                if (root.getLeft() != null) {
-                    root = root.getLeft(); // is there need to reassign root?
-                    return contains(value);
-                }
-            } else if (value > root.getValue()) {
-                if (root.getRight() != null) {
-                    root = root.getRight(); // is there need to reassign root?
-                    return contains(value);
-                }
+        return contains(root, value);
+    }
+
+    private boolean contains(Node node, int value) {
+        if (node != null) {
+            if (value < node.getValue()) {
+                return contains(node.getLeft(), value); // We look for a lower node with recursion (left)
+            } else if (value > node.getValue()) {
+                return contains(node.getRight(), value); // We look for a greater node with recursion (right)
             } else {
-                return false;
+                return true;
             }
         }
         return false;
