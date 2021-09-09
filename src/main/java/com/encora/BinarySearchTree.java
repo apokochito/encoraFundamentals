@@ -5,26 +5,20 @@ public class BinarySearchTree implements Tree {
     private Node root;
 
     public Node add(int value) {
-        if (root == null) {
-            root = new Node(value);
-            return root;
-        } else if (value < root.getValue()) {
-            // when root is already set.
-            if (root.getLeft() == null) { // We look for a lower node (left)
-                root.setLeft(new Node(value));
-                return root; // Recursion
-            } else {
-                add(value); // is there need to reassign root?
-            }
-        } else if (value > root.getValue()) {
-            if (root.getRight() == null) { // We look for a grader node (right)
-                root.setRight(new Node(value));
-                return root;
-            } else {
-                add(value); // is there need to reassign root?
-            }
+        root = add(root, value);
+        return root;
+    }
+
+    private Node add(Node node, int value) {
+        if (node == null) {
+            node = new Node(value);
+            return node;
+        } else if (value < node.getValue()) {
+            node.setLeft(add(node.getLeft(), value)); // We look for a lower node with recursion (left)
+        } else if (value > node.getValue()) {
+            node.setRight(add(node.getRight(), value)); // We look for a greater node with recursion (right)
         }
-        return null;
+        return node;
     }
 
     public boolean contains(int value) {

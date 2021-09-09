@@ -21,8 +21,6 @@ class BinarySearchTreeTest {
         assertThat(tree.contains(1)).isFalse();
         assertThat(tree.add(1)).isNotNull();
         assertThat(tree.contains(1)).isTrue();
-        assertThat(tree.add(1)).isNull();
-        assertThat(tree.contains(1)).isTrue();
     }
 
     @Test
