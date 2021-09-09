@@ -39,23 +39,57 @@ public class BinarySearchTree implements Tree {
     }
 
     public Node delete(int value) {
-        return null;
+        return delete(root, value);
     }
 
-    public String printInOrder() {
-        if (root != null) {
-            if (root.getLeft().getLeft() != null) {
-                printInOrder();
+    private Node delete(Node node, int value) {
+        // Null validation
+        if (node == null) {
+            return null;
+        }
+
+        if (value < node.getValue()) {
+            node.setLeft(delete(node.getLeft(), value));
+        } else if (value > node.getValue()) {
+            node.setRight(delete(node.getRight(), value));
+        } else {
+            if (node.getRight() == null && node.getLeft() == null) {
+                // First scenario -> leaf
+                return null;
+            } else if (node.getLeft() == null) {
+                // Second scenario -> one child
+                return node.getRight();
+            } else if (node.getRight() == null) {
+                // Second scenario -> one child
+                return node.getLeft();
+            } else {
+                // Third scenario -> two children
+
             }
-            System.out.println(root.getLeft().getValue());
+        }
+
+        return node;
+    }
+
+    @Override
+    public String toString() {
+        if (root != null) {
+            if (root.getLeft() != null) {
+                if (root.getLeft().getLeft() != null) {
+                    return toString();
+                }
+                System.out.println(root.getLeft().getValue());
+            }
         }
         if (root != null) {
             System.out.println(root.getValue());
         }
-        if (root.getRight().getRight() != null) {
-            printInOrder();
+        if (root.getRight() != null) {
+            if (root.getRight().getRight() != null) {
+                return toString();
+            }
+            System.out.println(root.getRight().getValue());
         }
-        System.out.println(root.getRight().getValue());
         return "";
     }
 
