@@ -85,19 +85,8 @@ class BinarySearchTreeTest {
         assertThat(tree.add(7)).isNotNull();
         assertThat(tree.add(1)).isNotNull();
         assertThat(tree.contains(5)).isTrue();
+        tree.setOrder(Order.INORDER);
         assertThat(tree.toString()).isNotBlank().isEqualTo("[1, 3, 5, 6, 7]");
-        assertThat(tree.inOrder()).containsExactly(1, 3, 5, 6, 7);
-    }
-
-    @Test
-    void inOrderWithOptions() {
-        assertThat(tree.add(5)).isNotNull();
-        assertThat(tree.add(3)).isNotNull();
-        assertThat(tree.add(6)).isNotNull();
-        assertThat(tree.add(7)).isNotNull();
-        assertThat(tree.add(1)).isNotNull();
-        assertThat(tree.contains(5)).isTrue();
-        assertThat(tree.toStringOpt("1")).isNotBlank().isEqualTo("[1, 3, 5, 6, 7]");
         assertThat(tree.inOrder()).containsExactly(1, 3, 5, 6, 7);
     }
 
@@ -109,7 +98,8 @@ class BinarySearchTreeTest {
         assertThat(tree.add(7)).isNotNull();
         assertThat(tree.add(1)).isNotNull();
         assertThat(tree.contains(5)).isTrue();
-        assertThat(tree.toStringOpt("3")).isNotBlank().isEqualTo("[5, 1, 3, 6, 7]");
+        tree.setOrder(Order.PREORDER);
+        assertThat(tree.toString()).isNotBlank().isEqualTo("[5, 1, 3, 6, 7]");
         assertThat(tree.preOrder()).containsExactly(5, 1, 3, 6, 7);
     }
 
@@ -121,7 +111,8 @@ class BinarySearchTreeTest {
         assertThat(tree.add(7)).isNotNull();
         assertThat(tree.add(1)).isNotNull();
         assertThat(tree.contains(5)).isTrue();
-        assertThat(tree.toStringOpt("2")).isNotBlank().isEqualTo("[1, 3, 6, 7, 5]");
+        tree.setOrder(Order.POSTORDER);
+        assertThat(tree.toString()).isNotBlank().isEqualTo("[1, 3, 6, 7, 5]");
         assertThat(tree.postOrder()).containsExactly(1, 3, 6, 7, 5);
     }
 

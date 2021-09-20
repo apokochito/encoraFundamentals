@@ -10,6 +10,7 @@ public interface Tree {
     List<Integer> inOrder();
     List<Integer> preOrder();
     List<Integer> postOrder();
-    String toStringOpt(String opt);
     int getRoot();
+    Order getOrder();
+    void setOrder(Order order);
 }

@@ -6,6 +6,10 @@ import java.util.List;
 public class BinarySearchTree implements Tree {
 
     private Node root;
+    private Order order;
+
+    public Order getOrder() {return this.order;}
+    public void setOrder(Order order) {this.order = order;}
 
     public Node add(int value) {
         root = add(root, value);
@@ -137,18 +141,14 @@ public class BinarySearchTree implements Tree {
 
     @Override
     public String toString() {
-        return inOrder().toString();
-    }
-
-    public String toStringOpt(String opt) {
-        if (opt.equals("2")) {
-            return postOrder().toString();
-        } else if (opt.equals("3")) {
-            return preOrder().toString();
-        } else if (opt.equals("1")) {
-            return inOrder().toString();
-        } else {
-            return inOrder().toString();
+        switch (order) {
+            case PREORDER:
+                return preOrder().toString();
+            case POSTORDER:
+                return postOrder().toString();
+            case INORDER:
+            default:
+                return inOrder().toString();
         }
     }
 
@@ -159,5 +159,10 @@ public class BinarySearchTree implements Tree {
     ArrayList -> easy to search element by index
         Hard to add/delete element
      */
+}
 
+enum Order {
+    INORDER,
+    PREORDER,
+    POSTORDER;
 }
