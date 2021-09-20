@@ -137,24 +137,27 @@ public class BinarySearchTree implements Tree {
 
     @Override
     public String toString() {
-        if (root != null) {
-            if (root.getLeft() != null) {
-                if (root.getLeft().getLeft() != null) {
-                    return toString();
-                }
-                System.out.println(root.getLeft().getValue());
-            }
-        }
-        if (root != null) {
-            System.out.println(root.getValue());
-        }
-        if (root.getRight() != null) {
-            if (root.getRight().getRight() != null) {
-                return toString();
-            }
-            System.out.println(root.getRight().getValue());
-        }
-        return "";
+        return inOrder().toString();
     }
+
+    public String toStringOpt(String opt) {
+        if (opt.equals("2")) {
+            return postOrder().toString();
+        } else if (opt.equals("3")) {
+            return preOrder().toString();
+        } else if (opt.equals("1")) {
+            return inOrder().toString();
+        } else {
+            return inOrder().toString();
+        }
+    }
+
+    /*
+    Effort difference between ArrayList vs LinkedList
+    LinkedList -> easy to add/delete element
+        Hard to search element by index
+    ArrayList -> easy to search element by index
+        Hard to add/delete element
+     */
 
 }

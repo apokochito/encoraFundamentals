@@ -90,6 +90,18 @@ class BinarySearchTreeTest {
     }
 
     @Test
+    void inOrderWithOptions() {
+        assertThat(tree.add(5)).isNotNull();
+        assertThat(tree.add(3)).isNotNull();
+        assertThat(tree.add(6)).isNotNull();
+        assertThat(tree.add(7)).isNotNull();
+        assertThat(tree.add(1)).isNotNull();
+        assertThat(tree.contains(5)).isTrue();
+        assertThat(tree.toStringOpt("1")).isNotBlank().isEqualTo("[1, 3, 5, 6, 7]");
+        assertThat(tree.inOrder()).containsExactly(1, 3, 5, 6, 7);
+    }
+
+    @Test
     void preOrder() {
         assertThat(tree.add(5)).isNotNull();
         assertThat(tree.add(3)).isNotNull();
