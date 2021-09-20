@@ -8,7 +8,6 @@ public class BinarySearchTree implements Tree {
     private Node root;
     private Order order;
 
-    public Order getOrder() {return this.order;}
     public void setOrder(Order order) {this.order = order;}
 
     public Node add(int value) {
@@ -159,10 +158,4 @@ public class BinarySearchTree implements Tree {
     ArrayList -> easy to search element by index
         Hard to add/delete element
      */
-}
-
-enum Order {
-    INORDER,
-    PREORDER,
-    POSTORDER;
 }

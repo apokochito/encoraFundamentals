@@ -11,6 +11,5 @@ public interface Tree {
     List<Integer> preOrder();
     List<Integer> postOrder();
     int getRoot();
-    Order getOrder();
     void setOrder(Order order);
 }
