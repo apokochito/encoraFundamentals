@@ -1,11 +1,13 @@
 package com.encora;
 
 import lombok.Data;
+import lombok.NonNull;
 
 @Data
 class Node {
 
-    private final int value;
+    @NonNull
+    private int value;
     private Node left;
     private Node right;
 

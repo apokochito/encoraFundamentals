@@ -35,15 +35,6 @@ class BinarySearchTreeTest {
     }
 
     @Test
-    void string() {
-        assertThat(tree.add(3)).isNotNull();
-        assertThat(tree.add(37)).isNotNull();
-        assertThat(tree.add(2)).isNotNull();
-        //assertThat(tree.add(49)).isNotNull(); Failing
-        assertThat(tree.toString()).isEmpty();
-    }
-
-    @Test
     void deleteLeaf() {
         assertThat(tree.add(5)).isNotNull();
         assertThat(tree.add(3)).isNotNull();
@@ -83,16 +74,43 @@ class BinarySearchTreeTest {
         assertThat(tree.contains(5)).isTrue();
         assertThat(tree.delete(5)).isNotNull();
         assertThat(tree.contains(5)).isFalse();
+        assertThat(tree.contains(3)).isTrue();
     }
 
     @Test
     void inOrder() {
-        // It is used by toString
-        // Validate string
+        assertThat(tree.add(5)).isNotNull();
+        assertThat(tree.add(3)).isNotNull();
+        assertThat(tree.add(6)).isNotNull();
+        assertThat(tree.add(7)).isNotNull();
+        assertThat(tree.add(1)).isNotNull();
+        assertThat(tree.contains(5)).isTrue();
+        assertThat(tree.toString()).isNotBlank().isEqualTo("[1, 3, 5, 6, 7]");
+        assertThat(tree.inOrder()).containsExactly(1, 3, 5, 6, 7);
     }
 
     @Test
     void preOrder() {
-        // Validate string
+        assertThat(tree.add(5)).isNotNull();
+        assertThat(tree.add(3)).isNotNull();
+        assertThat(tree.add(6)).isNotNull();
+        assertThat(tree.add(7)).isNotNull();
+        assertThat(tree.add(1)).isNotNull();
+        assertThat(tree.contains(5)).isTrue();
+        assertThat(tree.toStringOpt("3")).isNotBlank().isEqualTo("[5, 1, 3, 6, 7]");
+        assertThat(tree.preOrder()).containsExactly(5, 1, 3, 6, 7);
     }
+
+    @Test
+    void postOrder() {
+        assertThat(tree.add(5)).isNotNull();
+        assertThat(tree.add(3)).isNotNull();
+        assertThat(tree.add(6)).isNotNull();
+        assertThat(tree.add(7)).isNotNull();
+        assertThat(tree.add(1)).isNotNull();
+        assertThat(tree.contains(5)).isTrue();
+        assertThat(tree.toStringOpt("2")).isNotBlank().isEqualTo("[1, 3, 6, 7, 5]");
+        assertThat(tree.postOrder()).containsExactly(1, 3, 6, 7, 5);
+    }
+
 }
