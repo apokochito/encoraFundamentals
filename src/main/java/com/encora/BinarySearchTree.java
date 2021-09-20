@@ -1,5 +1,8 @@
 package com.encora;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class BinarySearchTree implements Tree {
 
     private Node root;
@@ -64,11 +67,72 @@ public class BinarySearchTree implements Tree {
                 return node.getLeft();
             } else {
                 // Third scenario -> two children
-
+                int smallestRightNumber = smallestRightNumber(node.getRight());
+                node.setValue(smallestRightNumber);
+                node.setRight(delete(node.getRight(), smallestRightNumber));
             }
+            return root;
         }
 
         return node;
+    }
+
+    private int smallestRightNumber(Node root) {
+        /* Without recursion
+        Node aux = root;
+        while (aux.getLeft() != null) {
+            aux = root.getLeft();
+        }
+        return aux.getValue();
+         */
+        Node left = root.getLeft();
+        return left == null ? root.getValue() : smallestRightNumber(left);
+    }
+
+    public List<Integer> inOrder() {
+        return inOrder(root);
+    }
+
+    private List<Integer> inOrder(Node node) {
+        List<Integer> tree = new LinkedList<Integer>();
+        if (node != null) {
+            tree.addAll(inOrder(node.getLeft()));
+            tree.add(node.getValue());
+            tree.addAll(inOrder(node.getRight()));
+        }
+        return tree;
+    }
+
+    public List<Integer> preOrder() {
+        return preOrder(root);
+    }
+
+    private List<Integer> preOrder(Node node) {
+        List<Integer> tree = new LinkedList<Integer>();
+        if (node != null) {
+            tree.add(node.getValue());
+            tree.addAll(inOrder(node.getLeft()));
+            tree.addAll(inOrder(node.getRight()));
+        }
+        return tree;
+    }
+
+    public List<Integer> postOrder() {
+        return postOrder(root);
+    }
+
+    private List<Integer> postOrder(Node node) {
+        List<Integer> tree = new LinkedList<Integer>();
+        if (node != null) {
+            tree.addAll(inOrder(node.getLeft()));
+            tree.addAll(inOrder(node.getRight()));
+            tree.add(node.getValue());
+        }
+        return tree;
+    }
+
+    public int getRoot() {
+        return root.getValue();
     }
 
     @Override
