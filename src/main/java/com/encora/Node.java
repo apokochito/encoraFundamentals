@@ -4,11 +4,11 @@ import lombok.Data;
 import lombok.NonNull;
 
 @Data
-class Node {
+class Node<T> {
 
     @NonNull
-    private int value;
-    private Node left;
-    private Node right;
+    private T data;
+    private Node<T> left;
+    private Node<T> right;
 
 }

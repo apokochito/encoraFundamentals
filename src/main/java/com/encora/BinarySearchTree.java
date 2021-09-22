@@ -1,42 +1,57 @@
 package com.encora;
 
+import lombok.NonNull;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVPrinter;
+import org.apache.commons.csv.CSVRecord;
+
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.Reader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.LinkedList;
 import java.util.List;
 
-public class BinarySearchTree implements Tree {
+public class BinarySearchTree<T extends Comparable<T>> implements Tree<Node> {
+
+    private void givenCSVFile_whenRead_thenContentsAsExpected() throws IOException {
 
     private Node root;
     private Order order;
 
-    public void setOrder(Order order) {this.order = order;}
+    public void setOrder(Order order) {
+        this.order = order;
+    }
 
-    public Node add(int value) {
-        root = add(root, value);
+    public Node<T> add(T data) {
+        root = add(root, data);
         return root;
     }
 
-    private Node add(Node node, int value) {
+    private Node<T> add(Node<T> node, T data) {
         if (node == null) {
-            node = new Node(value);
+            node = new Node<T>(data);
             return node;
-        } else if (value < node.getValue()) {
-            node.setLeft(add(node.getLeft(), value)); // We look for a lower node with recursion (left)
-        } else if (value > node.getValue()) {
-            node.setRight(add(node.getRight(), value)); // We look for a greater node with recursion (right)
+        } else if (data.compareTo(root.getData()) < 0) {
+            node.setLeft(add(node.getLeft(), data)); // We look for a lower node with recursion (left)
+        } else if (data.compareTo(root.getData()) > 0) {
+            node.setRight(add(node.getRight(), data)); // We look for a greater node with recursion (right)
         }
         return node;
     }
 
-    public boolean contains(int value) {
-        return contains(root, value);
+    public boolean contains(T data) {
+        return contains(root, data);
     }
 
-    private boolean contains(Node node, int value) {
+    private boolean contains(Node<T> node, T data) {
         if (node != null) {
-            if (value < node.getValue()) {
-                return contains(node.getLeft(), value); // We look for a lower node with recursion (left)
-            } else if (value > node.getValue()) {
-                return contains(node.getRight(), value); // We look for a greater node with recursion (right)
+            if (data.compareTo(root.getData()) < 0) {
+                return contains(node.getLeft(), data); // We look for a lower node with recursion (left)
+            } else if (data.compareTo(root.getData()) > 0) {
+                return contains(node.getRight(), data); // We look for a greater node with recursion (right)
             } else {
                 return true;
             }
@@ -44,20 +59,20 @@ public class BinarySearchTree implements Tree {
         return false;
     }
 
-    public Node delete(int value) {
-        return delete(root, value);
+    public Node<T> delete(T data) {
+        return delete(root, data);
     }
 
-    private Node delete(Node node, int value) {
+    private Node<T> delete(Node<T> node, T data) {
         // Null validation
         if (node == null) {
             return null;
         }
 
-        if (value < node.getValue()) {
-            node.setLeft(delete(node.getLeft(), value));
-        } else if (value > node.getValue()) {
-            node.setRight(delete(node.getRight(), value));
+        if (data.compareTo(root.getData()) < 0) {
+            node.setLeft(delete(node.getLeft(), data));
+        } else if (data.compareTo(root.getData()) > 0) {
+            node.setRight(delete(node.getRight(), data));
         } else {
             if (node.getRight() == null && node.getLeft() == null) {
                 // First scenario -> leaf
@@ -70,8 +85,8 @@ public class BinarySearchTree implements Tree {
                 return node.getLeft();
             } else {
                 // Third scenario -> two children
-                int smallestRightNumber = smallestRightNumber(node.getRight());
-                node.setValue(smallestRightNumber);
+                T smallestRightNumber = smallestRightNumber(node.getRight());
+                node.setData(smallestRightNumber);
                 node.setRight(delete(node.getRight(), smallestRightNumber));
             }
             return root;
@@ -80,7 +95,7 @@ public class BinarySearchTree implements Tree {
         return node;
     }
 
-    private int smallestRightNumber(Node root) {
+    private T smallestRightNumber(Node<T> root) {
         /* Without recursion
         Node aux = root;
         while (aux.getLeft() != null) {
@@ -88,54 +103,54 @@ public class BinarySearchTree implements Tree {
         }
         return aux.getValue();
          */
-        Node left = root.getLeft();
-        return left == null ? root.getValue() : smallestRightNumber(left);
+        Node<T> left = root.getLeft();
+        return left == null ? root.getData() : smallestRightNumber(left);
     }
 
-    public List<Integer> inOrder() {
+    public List<T> inOrder() {
         return inOrder(root);
     }
 
-    private List<Integer> inOrder(Node node) {
-        List<Integer> tree = new LinkedList<Integer>();
+    private List<T> inOrder(Node<T> node) {
+        List<@NonNull T> tree = new LinkedList<>();
         if (node != null) {
             tree.addAll(inOrder(node.getLeft()));
-            tree.add(node.getValue());
+            tree.add(node.getData());
             tree.addAll(inOrder(node.getRight()));
         }
         return tree;
     }
 
-    public List<Integer> preOrder() {
+    public List<T> preOrder() {
         return preOrder(root);
     }
 
-    private List<Integer> preOrder(Node node) {
-        List<Integer> tree = new LinkedList<Integer>();
+    private List<T> preOrder(Node<T> node) {
+        List<@NonNull T> tree = new LinkedList<>();
         if (node != null) {
-            tree.add(node.getValue());
+            tree.add(node.getData());
             tree.addAll(inOrder(node.getLeft()));
             tree.addAll(inOrder(node.getRight()));
         }
         return tree;
     }
 
-    public List<Integer> postOrder() {
+    public List<T> postOrder() {
         return postOrder(root);
     }
 
-    private List<Integer> postOrder(Node node) {
-        List<Integer> tree = new LinkedList<Integer>();
+    private List<T> postOrder(Node<T> node) {
+        List<@NonNull T> tree = new LinkedList<>();
         if (node != null) {
             tree.addAll(inOrder(node.getLeft()));
             tree.addAll(inOrder(node.getRight()));
-            tree.add(node.getValue());
+            tree.add(node.getData());
         }
         return tree;
     }
 
-    public int getRoot() {
-        return root.getValue();
+    public T getRoot() {
+        return root.getData();
     }
 
     @Override
@@ -158,4 +173,5 @@ public class BinarySearchTree implements Tree {
     ArrayList -> easy to search element by index
         Hard to add/delete element
      */
+
 }

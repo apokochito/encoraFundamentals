@@ -2,14 +2,14 @@ package com.encora;
 
 import java.util.List;
 
-public interface Tree {
+public interface Tree<T> extends Comparable<T> {
 
-    Node add(int value);
-    boolean contains(int value);
-    Node delete(int value);
-    List<Integer> inOrder();
-    List<Integer> preOrder();
-    List<Integer> postOrder();
-    int getRoot();
+    Node<T> add(T data);
+    boolean contains(T data);
+    Node<T> delete(T data);
+    List<T> inOrder();
+    List<T> preOrder();
+    List<T> postOrder();
+    T getRoot();
     void setOrder(Order order);
 }
