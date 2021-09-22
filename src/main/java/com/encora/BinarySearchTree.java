@@ -18,7 +18,36 @@ public class BinarySearchTree<T extends Comparable<T>> implements Tree<Node> {
 
     private void givenCSVFile_whenRead_thenContentsAsExpected() throws IOException {
 
-    private Node root;
+        // Reading CSV
+        String url = "C:\\Users\\Diana Elena\\IdeaProjects\\encoraFundamentals\\src\\main\\resources\\wine-dataset.csv";
+        Reader reader = Files.newBufferedReader(Paths.get(url));
+        CSVParser csvParser = CSVFormat.DEFAULT.parse(reader);
+        // csvParser.getRecords()
+        //       .forEach(csvRecord -> System.out.println("Name: " + csvRecord.get(0) + " Kind: " + csvRecord.get(1) + " Ph: "+ csvRecord.get(2) + " Alcohol: "+ csvRecord.get(3)+" Quality: "+csvRecord.get(4)));
+        for (CSVRecord record : csvParser.getRecords()) {
+            String name = record.get(0);
+            String kind = record.get(1);
+            String ph = record.get(2);
+            String alcohol = record.get(3);
+            String quality = record.get(4);
+            System.out.println(name + " " + kind + " " + ph + " " + alcohol + " " + quality);
+        }
+        // Writing CSV
+        String outputFilePath = "C:\\Users\\Diana Elena\\IdeaProjects\\encoraFundamentals\\src\\main\\resources\\csvFile.csv";
+        BufferedWriter bufferedWriter = Files.newBufferedWriter(Paths.get(outputFilePath));
+        try (CSVPrinter csvPrinter = CSVFormat.DEFAULT.withHeader("Name", "Kind", "PH", "Alcohol", "Quality")
+                .print(bufferedWriter)) {
+            csvPrinter.printRecord("test1", "test2", "test3", "test4", "test5");
+            csvPrinter.printRecord("test1", "test2", "test3", "test4", "test5");
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+        BinarySearchTree tree = new BinarySearchTree();
+        tree.givenCSVFile_whenRead_thenContentsAsExpected();
+    }
+
+    private Node<T> root;
     private Order order;
 
     public void setOrder(Order order) {
