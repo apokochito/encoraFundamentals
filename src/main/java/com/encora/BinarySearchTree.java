@@ -1,51 +1,11 @@
 package com.encora;
 
 import lombok.NonNull;
-import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVParser;
-import org.apache.commons.csv.CSVPrinter;
-import org.apache.commons.csv.CSVRecord;
 
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.Reader;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.LinkedList;
 import java.util.List;
 
-public class BinarySearchTree<T extends Comparable<T>> implements Tree<Node> {
-
-    private void givenCSVFile_whenRead_thenContentsAsExpected() throws IOException {
-
-        // Reading CSV
-        String url = "C:\\Users\\Diana Elena\\IdeaProjects\\encoraFundamentals\\src\\main\\resources\\wine-dataset.csv";
-        Reader reader = Files.newBufferedReader(Paths.get(url));
-        CSVParser csvParser = CSVFormat.DEFAULT.parse(reader);
-        // csvParser.getRecords()
-        //       .forEach(csvRecord -> System.out.println("Name: " + csvRecord.get(0) + " Kind: " + csvRecord.get(1) + " Ph: "+ csvRecord.get(2) + " Alcohol: "+ csvRecord.get(3)+" Quality: "+csvRecord.get(4)));
-        for (CSVRecord record : csvParser.getRecords()) {
-            String name = record.get(0);
-            String kind = record.get(1);
-            String ph = record.get(2);
-            String alcohol = record.get(3);
-            String quality = record.get(4);
-            System.out.println(name + " " + kind + " " + ph + " " + alcohol + " " + quality);
-        }
-        // Writing CSV
-        String outputFilePath = "C:\\Users\\Diana Elena\\IdeaProjects\\encoraFundamentals\\src\\main\\resources\\csvFile.csv";
-        BufferedWriter bufferedWriter = Files.newBufferedWriter(Paths.get(outputFilePath));
-        try (CSVPrinter csvPrinter = CSVFormat.DEFAULT.withHeader("Name", "Kind", "PH", "Alcohol", "Quality")
-                .print(bufferedWriter)) {
-            csvPrinter.printRecord("test1", "test2", "test3", "test4", "test5");
-            csvPrinter.printRecord("test1", "test2", "test3", "test4", "test5");
-        }
-    }
-
-    public static void main(String[] args) throws IOException {
-        BinarySearchTree tree = new BinarySearchTree();
-        tree.givenCSVFile_whenRead_thenContentsAsExpected();
-    }
+public class BinarySearchTree<T extends Comparable<T>> implements Tree<T> {
 
     private Node<T> root;
     private Order order;
@@ -54,6 +14,7 @@ public class BinarySearchTree<T extends Comparable<T>> implements Tree<Node> {
         this.order = order;
     }
 
+    @Override
     public Node<T> add(T data) {
         root = add(root, data);
         return root;
@@ -136,7 +97,8 @@ public class BinarySearchTree<T extends Comparable<T>> implements Tree<Node> {
         return left == null ? root.getData() : smallestRightNumber(left);
     }
 
-    public List<T> inOrder() {
+
+    private List<T> inOrder() {
         return inOrder(root);
     }
 
@@ -150,7 +112,7 @@ public class BinarySearchTree<T extends Comparable<T>> implements Tree<Node> {
         return tree;
     }
 
-    public List<T> preOrder() {
+    private List<T> preOrder() {
         return preOrder(root);
     }
 
@@ -164,7 +126,7 @@ public class BinarySearchTree<T extends Comparable<T>> implements Tree<Node> {
         return tree;
     }
 
-    public List<T> postOrder() {
+    private List<T> postOrder() {
         return postOrder(root);
     }
 
@@ -178,21 +140,22 @@ public class BinarySearchTree<T extends Comparable<T>> implements Tree<Node> {
         return tree;
     }
 
-    public T getRoot() {
-        return root.getData();
+    public List<T> display(Order order) {
+        this.order = order;
+        switch (order) {
+            case PREORDER:
+                return preOrder();
+            case POSTORDER:
+                return postOrder();
+            case INORDER:
+            default:
+                return inOrder();
+        }
     }
 
     @Override
     public String toString() {
-        switch (order) {
-            case PREORDER:
-                return preOrder().toString();
-            case POSTORDER:
-                return postOrder().toString();
-            case INORDER:
-            default:
-                return inOrder().toString();
-        }
+        return display(order).toString();
     }
 
     /*
