@@ -7,9 +7,5 @@ public interface Tree {
     Node add(int value);
     boolean contains(int value);
     Node delete(int value);
-    List<Integer> inOrder();
-    List<Integer> preOrder();
-    List<Integer> postOrder();
-    int getRoot();
-    void setOrder(Order order);
+    List<Integer> display(Order order);
 }

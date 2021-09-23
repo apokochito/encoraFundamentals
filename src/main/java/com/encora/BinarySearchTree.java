@@ -8,8 +8,6 @@ public class BinarySearchTree implements Tree {
     private Node root;
     private Order order;
 
-    public void setOrder(Order order) {this.order = order;}
-
     public Node add(int value) {
         root = add(root, value);
         return root;
@@ -46,6 +44,24 @@ public class BinarySearchTree implements Tree {
 
     public Node delete(int value) {
         return delete(root, value);
+    }
+
+    @Override
+    public String toString() {
+        return display(order).toString();
+    }
+
+    public List<Integer> display(Order order) {
+        this.order = order;
+        switch (order) {
+            case PREORDER:
+                return preOrder();
+            case POSTORDER:
+                return postOrder();
+            case INORDER:
+            default:
+                return inOrder();
+        }
     }
 
     private Node delete(Node node, int value) {
@@ -132,23 +148,6 @@ public class BinarySearchTree implements Tree {
             tree.add(node.getValue());
         }
         return tree;
-    }
-
-    public int getRoot() {
-        return root.getValue();
-    }
-
-    @Override
-    public String toString() {
-        switch (order) {
-            case PREORDER:
-                return preOrder().toString();
-            case POSTORDER:
-                return postOrder().toString();
-            case INORDER:
-            default:
-                return inOrder().toString();
-        }
     }
 
     /*
