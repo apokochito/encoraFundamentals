@@ -9,11 +9,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class BinarySearchTreeTest {
 
-    private Tree<Wine> tree;
+    private Tree<Integer> tree;
 
     @BeforeEach
     void init() {
-        this.tree = new BinarySearchTree();
+        this.tree = new BinarySearchTree<>();
     }
 
     @Test
@@ -85,9 +85,8 @@ class BinarySearchTreeTest {
         assertThat(tree.add(7)).isNotNull();
         assertThat(tree.add(1)).isNotNull();
         assertThat(tree.contains(5)).isTrue();
-        tree.setOrder(Order.INORDER);
+        assertThat(tree.display(Order.INORDER)).containsExactly(1, 3, 5, 6, 7);
         assertThat(tree.toString()).isNotBlank().isEqualTo("[1, 3, 5, 6, 7]");
-        assertThat(tree.inOrder()).containsExactly(1, 3, 5, 6, 7);
     }
 
     @Test
@@ -98,9 +97,8 @@ class BinarySearchTreeTest {
         assertThat(tree.add(7)).isNotNull();
         assertThat(tree.add(1)).isNotNull();
         assertThat(tree.contains(5)).isTrue();
-        tree.setOrder(Order.PREORDER);
+        assertThat(tree.display(Order.PREORDER)).containsExactly(5, 1, 3, 6, 7);
         assertThat(tree.toString()).isNotBlank().isEqualTo("[5, 1, 3, 6, 7]");
-        assertThat(tree.preOrder()).containsExactly(5, 1, 3, 6, 7);
     }
 
     @Test
@@ -111,9 +109,8 @@ class BinarySearchTreeTest {
         assertThat(tree.add(7)).isNotNull();
         assertThat(tree.add(1)).isNotNull();
         assertThat(tree.contains(5)).isTrue();
-        tree.setOrder(Order.POSTORDER);
+        assertThat(tree.display(Order.POSTORDER)).containsExactly(1, 3, 6, 7, 5);
         assertThat(tree.toString()).isNotBlank().isEqualTo("[1, 3, 6, 7, 5]");
-        assertThat(tree.postOrder()).containsExactly(1, 3, 6, 7, 5);
     }
 
 }

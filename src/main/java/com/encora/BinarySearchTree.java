@@ -10,10 +10,6 @@ public class BinarySearchTree<T extends Comparable<T>> implements Tree<T> {
     private Node<T> root;
     private Order order;
 
-    public void setOrder(Order order) {
-        this.order = order;
-    }
-
     @Override
     public Node<T> add(T data) {
         root = add(root, data);
@@ -38,9 +34,9 @@ public class BinarySearchTree<T extends Comparable<T>> implements Tree<T> {
 
     private boolean contains(Node<T> node, T data) {
         if (node != null) {
-            if (data.compareTo(root.getData()) < 0) {
+            if (data.compareTo(node.getData()) < 0) {
                 return contains(node.getLeft(), data); // We look for a lower node with recursion (left)
-            } else if (data.compareTo(root.getData()) > 0) {
+            } else if (data.compareTo(node.getData()) > 0) {
                 return contains(node.getRight(), data); // We look for a greater node with recursion (right)
             } else {
                 return true;
@@ -59,9 +55,9 @@ public class BinarySearchTree<T extends Comparable<T>> implements Tree<T> {
             return null;
         }
 
-        if (data.compareTo(root.getData()) < 0) {
+        if (data.compareTo(node.getData()) < 0) {
             node.setLeft(delete(node.getLeft(), data));
-        } else if (data.compareTo(root.getData()) > 0) {
+        } else if (data.compareTo(node.getData()) > 0) {
             node.setRight(delete(node.getRight(), data));
         } else {
             if (node.getRight() == null && node.getLeft() == null) {
