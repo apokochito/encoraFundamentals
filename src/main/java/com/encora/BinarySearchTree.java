@@ -20,9 +20,9 @@ public class BinarySearchTree<T extends Comparable<T>> implements Tree<T> {
         if (node == null) {
             node = new Node<T>(data);
             return node;
-        } else if (data.compareTo(root.getData()) < 0) {
+        } else if (data.compareTo(node.getData()) < 0) {
             node.setLeft(add(node.getLeft(), data)); // We look for a lower node with recursion (left)
-        } else if (data.compareTo(root.getData()) > 0) {
+        } else if (data.compareTo(node.getData()) > 0) {
             node.setRight(add(node.getRight(), data)); // We look for a greater node with recursion (right)
         }
         return node;
