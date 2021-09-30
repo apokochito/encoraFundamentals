@@ -5,30 +5,26 @@ import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.csv.CSVRecord;
 
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.Reader;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.LinkedList;
-import java.util.List;
 
-class CSVProcessor<T> {
-    List<Node<T>> readCSV(String url) throws IOException {
-        Reader reader = Files.newBufferedReader(Paths.get(url));
-        CSVParser csvParser = CSVFormat.DEFAULT.parse(reader);
-        List<Node<T>> nodes = new LinkedList<>();
-        // Orika Mapper
-        for (CSVRecord record : csvParser.getRecords()) {
-            String name = record.get(0);
-            String kind = record.get(1);
-            String ph = record.get(2);
-            String alcohol = record.get(3);
-            String quality = record.get(4);
+class CSVProcessor<T extends Comparable<T>> {
 
-            System.out.println(name + " " + kind + " " + ph + " " + alcohol + " " + quality);
+    CSVProcessor(Mapper<T> mapper) {
+        this.mapper = mapper;
+    }
+
+    private Mapper<T> mapper;
+
+    Tree<T> readCSV(String url) throws IOException {
+        Reader reader = new FileReader(url);
+        Iterable<CSVRecord> records = CSVFormat.DEFAULT.parse(reader);
+        Tree<T> tree = new BinarySearchTree<>();
+        for (CSVRecord record : records) {
+            tree.add(mapper.fromRecord(record));
         }
-        return nodes;
+        return tree;
     }
 
     void writeCSV(String url) throws IOException {
