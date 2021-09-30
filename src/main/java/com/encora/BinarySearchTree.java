@@ -99,7 +99,7 @@ public class BinarySearchTree<T extends Comparable<T>> implements Tree<T> {
     }
 
     private List<T> inOrder(Node<T> node) {
-        List<@NonNull T> tree = new LinkedList<>();
+        List<T> tree = new LinkedList<>();
         if (node != null) {
             tree.addAll(inOrder(node.getLeft()));
             tree.add(node.getData());
@@ -113,7 +113,7 @@ public class BinarySearchTree<T extends Comparable<T>> implements Tree<T> {
     }
 
     private List<T> preOrder(Node<T> node) {
-        List<@NonNull T> tree = new LinkedList<>();
+        List<T> tree = new LinkedList<>();
         if (node != null) {
             tree.add(node.getData());
             tree.addAll(inOrder(node.getLeft()));
@@ -127,7 +127,7 @@ public class BinarySearchTree<T extends Comparable<T>> implements Tree<T> {
     }
 
     private List<T> postOrder(Node<T> node) {
-        List<@NonNull T> tree = new LinkedList<>();
+        List<T> tree = new LinkedList<>();
         if (node != null) {
             tree.addAll(inOrder(node.getLeft()));
             tree.addAll(inOrder(node.getRight()));

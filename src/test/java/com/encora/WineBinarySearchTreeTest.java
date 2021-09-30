@@ -85,8 +85,8 @@ class WineBinarySearchTreeTest {
         assertThat(tree.add(myFifthWine)).isNotNull();
         assertThat(tree.add(mySixthWine)).isNotNull();
         assertThat(tree.contains(mySecondWine)).isTrue();
-        //assertThat(tree.delete(mySecondWine)).isNotNull();
-        //assertThat(tree.contains(mySecondWine)).isFalse();
+        assertThat(tree.delete(mySecondWine)).isNotNull();
+        assertThat(tree.contains(mySecondWine)).isFalse();
         assertThat(tree.contains(myThirdWine)).isTrue();
     }
 
@@ -101,7 +101,7 @@ class WineBinarySearchTreeTest {
         assertThat(tree.add(myFifthWine)).isNotNull();
         assertThat(tree.contains(myFourthWine)).isTrue();
         assertThat(tree.display(Order.INORDER));
-        assertThat(tree.toString()).isNotBlank().isEqualTo("[Wine(name=Chardonnay, kind=white, pH=3.22, alcohol=9.5, quality=6), Wine(name=St Thomas, kind=red, pH=3.26, alcohol=0.54, quality=7), Wine(name=Albarolo, kind=red, pH=3.28, alcohol=0.46, quality=5), Wine(name=Shiraz, kind=red, pH=3.3, alcohol=0.57, quality=6), Wine(name=Adobe Guadalupe, kind=red, pH=3.51, alcohol=0.56, quality=5)]");
+        assertThat(tree.toString()).isNotBlank().isEqualTo("[Wine(name=St Thomas, kind=red, pH=3.26, alcohol=0.54, quality=7), Wine(name=Albarolo, kind=red, pH=3.28, alcohol=0.46, quality=5), Wine(name=Shiraz, kind=red, pH=3.3, alcohol=0.57, quality=6), Wine(name=Adobe Guadalupe, kind=red, pH=3.51, alcohol=0.56, quality=5), Wine(name=Chardonnay, kind=white, pH=3.22, alcohol=9.5, quality=6)]");
     }
 
     @Test
@@ -113,7 +113,7 @@ class WineBinarySearchTreeTest {
         assertThat(tree.add(myFifthWine)).isNotNull();
         assertThat(tree.contains(myFourthWine)).isTrue();
         assertThat(tree.display(Order.PREORDER));
-        assertThat(tree.toString()).isNotBlank().isEqualTo("[Wine(name=Adobe Guadalupe, kind=red, pH=3.51, alcohol=0.56, quality=5), Wine(name=Chardonnay, kind=white, pH=3.22, alcohol=9.5, quality=6), Wine(name=St Thomas, kind=red, pH=3.26, alcohol=0.54, quality=7), Wine(name=Albarolo, kind=red, pH=3.28, alcohol=0.46, quality=5), Wine(name=Shiraz, kind=red, pH=3.3, alcohol=0.57, quality=6)]");
+        assertThat(tree.toString()).isNotBlank().isEqualTo("[Wine(name=Adobe Guadalupe, kind=red, pH=3.51, alcohol=0.56, quality=5), Wine(name=St Thomas, kind=red, pH=3.26, alcohol=0.54, quality=7), Wine(name=Albarolo, kind=red, pH=3.28, alcohol=0.46, quality=5), Wine(name=Shiraz, kind=red, pH=3.3, alcohol=0.57, quality=6), Wine(name=Chardonnay, kind=white, pH=3.22, alcohol=9.5, quality=6)]");
     }
 
     @Test
@@ -125,7 +125,7 @@ class WineBinarySearchTreeTest {
         assertThat(tree.add(myFifthWine)).isNotNull();
         assertThat(tree.contains(myFourthWine)).isTrue();
         assertThat(tree.display(Order.POSTORDER));
-        assertThat(tree.toString()).isNotBlank().isEqualTo("[Wine(name=Chardonnay, kind=white, pH=3.22, alcohol=9.5, quality=6), Wine(name=St Thomas, kind=red, pH=3.26, alcohol=0.54, quality=7), Wine(name=Albarolo, kind=red, pH=3.28, alcohol=0.46, quality=5), Wine(name=Shiraz, kind=red, pH=3.3, alcohol=0.57, quality=6), Wine(name=Adobe Guadalupe, kind=red, pH=3.51, alcohol=0.56, quality=5)]");
+        assertThat(tree.toString()).isNotBlank().isEqualTo("[Wine(name=St Thomas, kind=red, pH=3.26, alcohol=0.54, quality=7), Wine(name=Albarolo, kind=red, pH=3.28, alcohol=0.46, quality=5), Wine(name=Shiraz, kind=red, pH=3.3, alcohol=0.57, quality=6), Wine(name=Chardonnay, kind=white, pH=3.22, alcohol=9.5, quality=6), Wine(name=Adobe Guadalupe, kind=red, pH=3.51, alcohol=0.56, quality=5)]");
     }
 
 }
