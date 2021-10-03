@@ -18,10 +18,10 @@ class CSVProcessor<T extends Comparable<T>> {
     private Mapper<T> mapper;
 
     Tree<T> readCSV(String url) throws IOException {
-        Reader reader = new FileReader(url);
-        Iterable<CSVRecord> records = CSVFormat.DEFAULT.parse(reader);
         Tree<T> tree = new BinarySearchTree<>();
-        for (CSVRecord record : records) {
+        Reader reader = new FileReader(url);
+        CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT);
+        for (CSVRecord record : csvParser) {
             tree.add(mapper.fromRecord(record));
         }
         return tree;
