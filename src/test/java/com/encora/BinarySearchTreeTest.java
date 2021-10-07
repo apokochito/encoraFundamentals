@@ -1,5 +1,8 @@
 package com.encora;
 
+import com.encora.algorithm.BinarySearchTree;
+import com.encora.algorithm.Order;
+import com.encora.algorithm.Tree;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -9,11 +12,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class BinarySearchTreeTest {
 
-    private Tree tree;
+    private Tree<Integer> tree;
 
     @BeforeEach
     void init() {
-        this.tree = new BinarySearchTree();
+        this.tree = new BinarySearchTree<>();
     }
 
     @Test
