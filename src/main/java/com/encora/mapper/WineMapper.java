@@ -2,7 +2,9 @@ package com.encora.mapper;
 
 import com.encora.model.Wine;
 import org.apache.commons.csv.CSVRecord;
+import org.springframework.stereotype.Component;
 
+@Component
 public class WineMapper implements Mapper<Wine> {
 
     @Override
