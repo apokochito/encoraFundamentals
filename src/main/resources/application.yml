@@ -1,0 +1,2 @@
+datasource:
+  url: "src/main/resources/wine-dataset.csv"
