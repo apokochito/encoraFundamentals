@@ -1,6 +1,6 @@
 package com.encora.algorithm;
 
-public enum Order {
+enum Order {
     INORDER,
     PREORDER,
     POSTORDER;

@@ -1,8 +1,5 @@
-package com.encora;
+package com.encora.algorithm;
 
-import com.encora.algorithm.BinarySearchTree;
-import com.encora.algorithm.Order;
-import com.encora.algorithm.Tree;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;

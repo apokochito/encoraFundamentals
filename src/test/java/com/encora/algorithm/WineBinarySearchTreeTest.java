@@ -1,4 +1,4 @@
-package com.encora;
+package com.encora.algorithm;
 
 import com.encora.algorithm.BinarySearchTree;
 import com.encora.algorithm.Order;
