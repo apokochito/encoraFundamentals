@@ -1,4 +1,4 @@
-package com.encora;
+package com.encora.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,7 +7,7 @@ import java.util.Comparator;
 
 @AllArgsConstructor
 @Data
-class Wine implements Comparable<Wine> {
+public class Wine implements Comparable<Wine> {
 
     private String name;
     private String kind;
@@ -21,6 +21,7 @@ class Wine implements Comparable<Wine> {
         return Comparator.comparing(Wine::getKind).thenComparing(Wine::getPH).compare(this, o);
     }
     /*
+    Other approaches:
         @Override
         public int compareTo(Apple other) {
             int result = this.name.compareTo(other.name);

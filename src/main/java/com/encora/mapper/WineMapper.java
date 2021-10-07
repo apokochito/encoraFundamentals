@@ -1,5 +1,6 @@
-package com.encora;
+package com.encora.mapper;
 
+import com.encora.model.Wine;
 import org.apache.commons.csv.CSVRecord;
 
 public class WineMapper implements Mapper<Wine> {

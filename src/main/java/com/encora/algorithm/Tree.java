@@ -1,4 +1,6 @@
-package com.encora;
+package com.encora.algorithm;
+
+import com.encora.model.Node;
 
 import java.util.List;
 

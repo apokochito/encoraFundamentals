@@ -1,5 +1,8 @@
-package com.encora;
+package com.encora.processor;
 
+import com.encora.algorithm.BinarySearchTree;
+import com.encora.algorithm.Tree;
+import com.encora.mapper.Mapper;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVPrinter;
@@ -9,7 +12,7 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-class CSVProcessor<T extends Comparable<T>> {
+public class CSVProcessor<T extends Comparable<T>> {
 
     CSVProcessor(Mapper<T> mapper) {
         this.mapper = mapper;
@@ -17,7 +20,7 @@ class CSVProcessor<T extends Comparable<T>> {
 
     private Mapper<T> mapper;
 
-    Tree<T> readCSV(String url) throws IOException {
+    public Tree<T> readCSV(String url) throws IOException {
         Tree<T> tree = new BinarySearchTree<>();
         Reader reader = new FileReader(url);
         CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT);
@@ -27,7 +30,7 @@ class CSVProcessor<T extends Comparable<T>> {
         return tree;
     }
 
-    void writeCSV(String url) throws IOException {
+    public void writeCSV(String url) throws IOException {
         BufferedWriter bufferedWriter = Files.newBufferedWriter(Paths.get(url));
         try (CSVPrinter csvPrinter = CSVFormat.DEFAULT.withHeader("Name", "Kind", "PH", "Alcohol", "Quality")
                 .print(bufferedWriter)) {

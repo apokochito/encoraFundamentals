@@ -1,10 +1,10 @@
-package com.encora;
+package com.encora.model;
 
 import lombok.Data;
 import lombok.NonNull;
 
 @Data
-class Node<T> {
+public class Node<T> {
 
     @NonNull
     private T data;

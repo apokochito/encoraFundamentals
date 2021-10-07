@@ -1,4 +1,4 @@
-package com.encora;
+package com.encora.mapper;
 
 import org.apache.commons.csv.CSVRecord;
 
