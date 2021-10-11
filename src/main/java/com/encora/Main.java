@@ -1,18 +1,18 @@
 package com.encora;
 
-import com.encora.algorithm.Order;
-import com.encora.algorithm.Tree;
-import com.encora.mapper.WineMapper;
-import com.encora.model.Wine;
-import com.encora.processor.CSVProcessor;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.io.IOException;
 
+@SpringBootApplication
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        CSVProcessor<Wine> csvProcessor = new CSVProcessor<>(new WineMapper());
+        SpringApplication.run(Main.class, args);
+        System.out.println("Hello world");
+        /*CSVProcessor<Wine> csvProcessor = new CSVProcessor<>(new WineMapper());
         Tree<Wine> tree = csvProcessor.readCSV("C:\\Users\\Diana Elena\\IdeaProjects\\encoraFundamentals\\src\\main\\resources\\wine-dataset.csv");
-        tree.display(Order.INORDER);
+        tree.display(Order.INORDER);*/
     }
 }
